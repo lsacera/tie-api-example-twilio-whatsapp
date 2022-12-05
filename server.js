@@ -67,7 +67,7 @@ function handleTwilioMessages(sessionHandler) {
 function sendTwilioMessage(teneoResponse, res) {
 
   const usermsg = teneoResponse.output.text;
-  const twiml = new MessagingResponse();
+  var twiml = new MessagingResponse();
   
 //Start of testing...  
 //From the twilio api doc, you can send MMS, text and image. But worked once and now is not working
