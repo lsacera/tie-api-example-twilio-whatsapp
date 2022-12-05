@@ -69,7 +69,9 @@ function sendTwilioMessage(teneoResponse, res) {
   const message = teneoResponse.output.text;
   const twiml = new MessagingResponse();
 
-  twiml.message(message);
+  //twiml.message(message);
+  twiml.message.body('Store Location: 123 Easy St.');
+  twiml.message.media('https://demo.twilio.com/owl.png');
 
   res.writeHead(200, { 'Content-Type': 'text/xml' });
   res.end(twiml.toString());
