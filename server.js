@@ -66,16 +66,26 @@ function handleTwilioMessages(sessionHandler) {
 // compose and send message
 function sendTwilioMessage(teneoResponse, res) {
 
-  const message = teneoResponse.output.text;
+  const usermsg = teneoResponse.output.text;
   const twiml = new MessagingResponse();
   
 //From the twilio api doc, these are ways of setting different things in whatsapp
-//  const messaget = twiml.message();
-//  messaget.body('Store Location: 123 Easy St.');
-//  messaget.media('https://demo.twilio.com/owl.png');
-  
-  twiml.message(message);
-
+  if((teneoResponse.output.parameters != null) &&
+     (Object.keys(teneoResponse.output.parameters).length > 0)){
+     //Now look for a parameter called "whatsapp-media"
+     console.log('teneo parameters found');
+     if ((teneoResponse.output.parameters.showImage != null) &&
+        (teneoResponse.output.parameters.showImage.length > 0)){
+          console.log('teneo showImage parameter found');
+          const message = twiml.message();
+          message.body(teneoResponse.output.text); //text in the body
+          message.media(usermsg);
+          twiml.message(message);
+     }//end if
+  }//end if
+  else{
+    twiml.message(usermsg);
+  }
   res.writeHead(200, { 'Content-Type': 'text/xml' });
   res.end(twiml.toString());
 }
