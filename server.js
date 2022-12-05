@@ -70,6 +70,7 @@ function sendTwilioMessage(teneoResponse, res) {
   const twiml = new MessagingResponse();
 
   //twiml.message(message);
+  console.log(`Cosas a fuego!`);
   twiml.message.body('Store Location: 123 Easy St.');
   twiml.message.media('https://demo.twilio.com/owl.png');
 
