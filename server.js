@@ -94,6 +94,7 @@ function sendTwilioMessage(teneoResponse, res) {
     twiml.message(usermsg); //No parameters
   }
   res.writeHead(200, { 'Content-Type': 'text/xml' });
+  console.log('Message to send back: ' + twiml.toString());
   res.end(twiml.toString());
 }
 
