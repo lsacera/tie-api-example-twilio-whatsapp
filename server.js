@@ -74,12 +74,12 @@ function sendTwilioMessage(teneoResponse, res) {
      (Object.keys(teneoResponse.output.parameters).length > 0)){
      //Now look for a parameter called "whatsapp-media"
      console.log('teneo parameters found');
-     if ((teneoResponse.output.parameters.showImage != null) &&
-        (teneoResponse.output.parameters.showImage.length > 0)){
+     if ((teneoResponse.output.parameters.imageUrl != null) &&
+        (teneoResponse.output.parameters.imageUrl.length > 0)){
           console.log('teneo showImage parameter found');
           const message = twiml.message();
-          message.body(teneoResponse.output.text); //text in the body
-          message.media(usermsg);
+          message.body(usermsg); //text in the body
+          message.media(teneoResponse.output.parameters.imageUrl);
           twiml.message(message);
      }//end if
   }//end if
