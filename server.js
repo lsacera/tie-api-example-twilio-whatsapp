@@ -78,8 +78,12 @@ function sendTwilioMessage(teneoResponse, res) {
         (teneoResponse.output.parameters.imageUrl.length > 0)){
           console.log('teneo showImage parameter found');
           const message = twiml.message();
-          message.body(usermsg); //text in the body
-          message.media(teneoResponse.output.parameters.imageUrl);
+         // message.body(usermsg); //text in the body
+         // message.media(teneoResponse.output.parameters.imageUrl);
+       
+  message.body('Store Location: 123 Easy St.');
+  message.media('https://demo.twilio.com/owl.png');
+       
           twiml.message(message);
      }//end if
      twiml.message(usermsg); //there are parameters, but not the one I am looking for
