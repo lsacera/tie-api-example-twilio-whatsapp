@@ -81,12 +81,14 @@ function sendTwilioMessage(teneoResponse, res) {
          // message.body(usermsg); //text in the body
          // message.media(teneoResponse.output.parameters.imageUrl);
        
-  message.body('Store Location: 123 Easy St.');
-  message.media('https://demo.twilio.com/owl.png');
+          message.body('Store Location: 123 Easy St.');
+          message.media('https://demo.twilio.com/owl.png');
        
           twiml.message(message);
      }//end if
-     twiml.message(usermsg); //there are parameters, but not the one I am looking for
+     else{//there are parameters, but not the one I am looking for, so I pass the user message
+       twiml.message(usermsg); 
+     }
   }//end if
   else{
     twiml.message(usermsg); //No parameters
