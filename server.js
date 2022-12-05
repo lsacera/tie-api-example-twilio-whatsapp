@@ -69,12 +69,12 @@ function sendTwilioMessage(teneoResponse, res) {
   const message = teneoResponse.output.text;
   const twiml = new MessagingResponse();
   
-console.log(`Cosas a fuego en otra variable!`);
-  const messaget = twiml.message();
-  messaget.body('Store Location: 123 Easy St.');
-  messaget.media('https://demo.twilio.com/owl.png');
+//From the twilio api doc, these are ways of setting different things in whatsapp
+//  const messaget = twiml.message();
+//  messaget.body('Store Location: 123 Easy St.');
+//  messaget.media('https://demo.twilio.com/owl.png');
   
-  //twiml.message(message);
+  twiml.message(message);
 
   res.writeHead(200, { 'Content-Type': 'text/xml' });
   res.end(twiml.toString());
