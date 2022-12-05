@@ -67,7 +67,7 @@ function handleTwilioMessages(sessionHandler) {
 function sendTwilioMessage(teneoResponse, res) {
 
   const usermsg = teneoResponse.output.text;
-  var twiml = new MessagingResponse();
+  const twiml = new MessagingResponse();
   
 //Start of testing...  
 //From the twilio api doc, you can send MMS, text and image. But worked once and now is not working
@@ -83,9 +83,7 @@ function sendTwilioMessage(teneoResponse, res) {
           console.log('twiml before setting: '+twiml.toString());
           message.body(usermsg); //text in the body
           message.media(teneoResponse.output.parameters.imageUrl);
-          console.log('Message before setting it in twiml: '+message.toString());  
-          twiml.message(message);
-          console.log('twiml after setting the message: '+twiml.toString());
+          //nothing more to do, twiml is populated now
      }//end if
      else{//there are parameters, but not the one I am looking for, so I pass the user message
        twiml.message(usermsg); 
