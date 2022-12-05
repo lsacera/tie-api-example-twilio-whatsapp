@@ -69,7 +69,8 @@ function sendTwilioMessage(teneoResponse, res) {
   const usermsg = teneoResponse.output.text;
   const twiml = new MessagingResponse();
   
-//From the twilio api doc, these are ways of setting different things in whatsapp
+//Start of testing...  
+//From the twilio api doc, you can send MMS, text and image. But worked once and now is not working
   if((teneoResponse.output.parameters != null) &&
      (Object.keys(teneoResponse.output.parameters).length > 0)){
      //Now look for a parameter called "whatsapp-media"
@@ -78,10 +79,13 @@ function sendTwilioMessage(teneoResponse, res) {
         (teneoResponse.output.parameters.imageUrl.length > 0)){
           console.log('teneo showImage parameter found');
           const message = twiml.message();
+          console.log('Message before setting: '+message.toString());
+          console.log('twiml before setting: '+twiml.toString());
           message.body(usermsg); //text in the body
           message.media(teneoResponse.output.parameters.imageUrl);
-             
+          console.log('Message before setting it in twiml: '+message.toString());  
           twiml.message(message);
+          console.log('twiml after setting the message: '+twiml.toString());
      }//end if
      else{//there are parameters, but not the one I am looking for, so I pass the user message
        twiml.message(usermsg); 
@@ -90,6 +94,9 @@ function sendTwilioMessage(teneoResponse, res) {
   else{
     twiml.message(usermsg); //No parameters
   }
+  //End testing, remove the following line if testing again
+  //twiml.message(usermsg); //No parameters
+    
   res.writeHead(200, { 'Content-Type': 'text/xml' });
   console.log('Message to send back: ' + twiml.toString());
   res.end(twiml.toString());
