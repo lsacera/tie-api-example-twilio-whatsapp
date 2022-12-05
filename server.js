@@ -69,7 +69,7 @@ function sendTwilioMessage(teneoResponse, res) {
   const message = teneoResponse.output.text;
   const twiml = new MessagingResponse();
   
-console.log(`Cosas a fuego 2!`);
+console.log(`Cosas a fuego en otra variable!`);
   const messaget = twiml.message();
   messaget.body('Store Location: 123 Easy St.');
   messaget.media('https://demo.twilio.com/owl.png');
