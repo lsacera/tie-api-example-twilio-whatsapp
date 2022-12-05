@@ -82,9 +82,10 @@ function sendTwilioMessage(teneoResponse, res) {
           message.media(teneoResponse.output.parameters.imageUrl);
           twiml.message(message);
      }//end if
+     twiml.message(usermsg); //there are parameters, but not the one I am looking for
   }//end if
   else{
-    twiml.message(usermsg);
+    twiml.message(usermsg); //No parameters
   }
   res.writeHead(200, { 'Content-Type': 'text/xml' });
   res.end(twiml.toString());
